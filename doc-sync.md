@@ -12,12 +12,14 @@ Analyze documentation vs code for sync issues.
 **Usage:** `/doc-sync [path-or-scope]`
 
 **Examples:**
+
 - `/doc-sync` - Check all documentation
 - `/doc-sync README.md` - Check specific file
 - `/doc-sync --api` - Check API documentation
 - `/doc-sync --fix` - Auto-fix sync issues
 
 **Workflow:**
+
 1. Find documentation files
 2. Compare with source code
 3. Identify outdated content
@@ -54,7 +56,7 @@ Check and sync specified documentation scope.
 
    # Doc directories
    ls -d docs/ documentation/ wiki/ 2>/dev/null
-   ```
+   ```text
 
    Categorize:
    - README files
@@ -76,13 +78,14 @@ Check and sync specified documentation scope.
 3. **Compare with Source Code**
 
    **Code Examples:**
+
    ```bash
    # Find code blocks in markdown
    grep -A 20 '```' README.md | grep -v '```'
 
    # Verify imports exist
    rg "import.*from" --type=ts --type=js
-   ```
+   ```text
 
    Check:
    - Do imported modules exist?
@@ -90,13 +93,14 @@ Check and sync specified documentation scope.
    - Are signatures correct?
 
    **CLI Commands:**
+
    ```bash
    # Extract commands from docs
    grep -E '^\s*\$|npm run|yarn |go |python ' README.md
 
    # Verify in package.json/Makefile
    cat package.json | jq '.scripts'
-   ```
+   ```text
 
    **API Endpoints:**
    - Compare OpenAPI spec with actual routes
@@ -140,7 +144,7 @@ Check and sync specified documentation scope.
 
    # Extract documented endpoints
    cat openapi.yaml | grep "paths:" -A 1000
-   ```
+   ```text
 
    Verify:
    - All routes documented
@@ -156,7 +160,7 @@ Check and sync specified documentation scope.
 
    # Find TODO/FIXME in docs
    rg "TODO|FIXME|DEPRECATED" --type=md
-   ```
+   ```text
 
    Identify:
    - Outdated JSDoc
@@ -188,42 +192,48 @@ Check and sync specified documentation scope.
    Documentation says:
    ```bash
    npm install my-package
-   ```
+   ```text
 
    But package name changed to:
+
    ```bash
    npm install @org/my-package
-   ```
+   ```text
 
    **Fix**: Update package name
 
    ---
 
    ### 2. API Docs - Missing Endpoint
+
    **Missing**: `POST /api/v2/users/batch`
 
    This endpoint exists in code but not documented:
+
    ```typescript
    // src/routes/users.ts:45
    router.post('/batch', batchCreateUsers);
-   ```
+   ```text
 
    **Fix**: Add endpoint documentation
 
    ---
 
    ### 3. README.md - Wrong Function Signature
+
    **Line 67**
 
    Documentation shows:
+
    ```typescript
    createUser(name: string): User
-   ```
+   ```text
 
    Actual signature:
+
    ```typescript
    createUser(name: string, email: string): Promise<User>
-   ```
+   ```text
 
    **Fix**: Update function signature
 
@@ -232,11 +242,13 @@ Check and sync specified documentation scope.
    ## Medium Priority Issues
 
    ### 4. Config Example Outdated
+
    **File**: docs/configuration.md:34
 
    Option `maxRetries` renamed to `retryCount`
 
    ### 5. CLI Command Changed
+
    **File**: README.md:89
 
    `npm run build:prod` → `npm run build`
@@ -244,6 +256,7 @@ Check and sync specified documentation scope.
    ## Low Priority Issues
 
    ### 6. Typo in File Path
+
    **File**: CONTRIBUTING.md:12
 
    `src/utils/helpers.ts` → `src/lib/helpers.ts`
@@ -264,7 +277,8 @@ Check and sync specified documentation scope.
 
    - API endpoint documentation (needs content)
    - New features not yet documented
-   ```
+
+   ```text
 
 9. **Apply Fixes (if --fix)**
 
@@ -273,7 +287,7 @@ Check and sync specified documentation scope.
    ```bash
    # Update README
    sed -i 's/npm install my-package/npm install @org\/my-package/' README.md
-   ```
+   ```text
 
    Track changes:
    - Create backup
@@ -300,16 +314,18 @@ Check and sync specified documentation scope.
         { "name": "Bob", "email": "bob@example.com" }
       ]
     }
-    ```
+    ```text
 
     **Response:**
+
     ```json
     {
       "created": 2,
       "users": [...]
     }
-    ```
-    ```
+    ```text
+
+    ```text
 
 ## Output Structure
 
@@ -333,7 +349,7 @@ Check and sync specified documentation scope.
 
 ## Manual Review
 [Issues needing human input]
-```
+```text
 
 ## What Gets Checked
 

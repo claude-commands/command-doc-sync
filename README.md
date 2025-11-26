@@ -14,7 +14,7 @@ ln -s <clone-path>/command-doc-sync/doc-sync.md ~/.claude/commands/doc-sync.md
 
 ## Usage
 
-```
+```text
 /doc-sync              # Check all documentation
 /doc-sync README.md    # Check specific file
 /doc-sync --api        # Check API documentation
